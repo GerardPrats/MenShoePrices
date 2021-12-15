@@ -1,0 +1,58 @@
+This database has a total of 48 features, but not all of them provide us with information for classification.
+Amazon Identifier, for example, is a random code that doesn't really provide us with much information. The actually
+important columns, here, will be marked with a (*).
+
+(*) id: serial number of the product.
+    - We will replace all values in this column by indexes from 1 to the number of rows.
+asins: amazon identifier.
+(*) brand: brand name of the product (or "unbranded" if none applies).
+(*) categories: list of category keywords used for this product.
+    - We will obtain each unique category and create a column for each, checking whether or not the product belongs to it.
+(*) colors: instead of checking for each individual color, we will check whether or not the product offers several colors or not.
+count: this column is completely null, which means we will not consider it.
+(*) dateadded: date the product was added to the database.
+(*) dateupdated: most recent update date of the product.
+(*) descriptions: list of descriptions for the product in various sources.
+    - We could consider either: the specific words that appear in the description, for analysis.
+    - The amount of descriptions.
+dimension: length, width, height of the product. This column has far too many null values to take it into account (85%).
+ean: EAN codes for the product, same as the amazon identifier.
+(*) features: contains different features for the product (Gender, Shoe Size, Shoe Category, etc.)
+flavors: not used.
+imageurls: each product has its own image, we cannot make a prediction based around the URL.
+isbn: reserved for books.
+keys: unique for each product, we cannot use it to make predictions.
+(*) manufacturer: though there are a lot of null values in this column, we could take them as "None" if there was none involved.
+(*) manufacturernum: might be more useful than manufacturer, as there are not as many null values (22% vs 65%).
+(*) merchants: the date seen and the name might be useful; more recently seen products might have better sales.
+name: the name of each unique shoe will not be useful for classification.
+(*) prices_amountmin: minimum value listed for the price. -|
+(*) prices_amountmax: maximum value listed for the price  -|--> might be useful to take the mean of both values.
+prices_availability: most values are null.
+prices_color: most values are null.
+(*) prices_condition: tells us the condition of the product.
+    - Will mostly be useful to analyze whether a product is new or not.
+prices_count: all values are null.
+prices_currency: almost all values are USD, it won't be useful to analyze the data.
+price_dateadded && prices_dateseen: dateadded and dateupdated already serve this purpose well enough.
+price_flavor: makes no sense with the current database.
+(*) prices_issale: checks whether the product is on sale or not.
+prices_merchant: merchants serves this purpose well.
+prices_offer: issale already serves this purpose well.
+prices_returnpolicy: most values are null.
+(*) prices_shipping: we can check whether the product 1. doesn't offer shipping. 2. offers free shipping. 3. offers charged shipping.
+prices_size: most values are null.
+prices_source: almost all values are null.
+prices_sourceurls: all values are unique, there's no use using this column.
+prices_warrantly: almost all values are null.
+quantities: almost all values are null.
+(*) reviews: might be useful to check which products have reviews and which don't, whether the review has been recent, and whether the review has been poositive.
+(*) sizes: the important part here is checking whether the product offers multiple sizes or not.
+skus, sourceurls, upc, vin, websiteids, weight: mostly contains unique values or mostly null values, not useful.
+
+------------------------------------------
+In conclusion, the important columns are:
+------------------------------------------
+- id, brand, category_X (for each category), colors (multiple?), dateadded, dateupdated, descriptions (amount),
+description (text), manufacturernum, merchant_name, prices_amountmin, prices_amountmax, prices_condition (new?),
+prices_issale, prices_shipping (no/free/charged), n_reviews, recent_review, positive_review, nsizes.

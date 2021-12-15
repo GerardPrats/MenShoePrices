@@ -1,0 +1,50 @@
+Since we know there's only 10000 unique items (kaggle information, id column), there must be duplicates.
+--------------------------------------------
+Total entries:  19387 ; total fields:  48
+New entries:  10000 ; new fields:  48
+
+Checking for null values in columns:
+------------------------------------
+asins                   9115  --> Consider null as "not on amazon", not null as "on amazon." -> New column.
+brand                    187  --> Consider null values as "unbranded".
+colors                  4386  --> Consider null values as "0 color/1 color".
+count                  10000  --> Unimportant, delete.
+descriptions            4846  --> Consider null values as "no descriptions".
+dimension               8623  --> Unimportant, delete.
+ean                     4328  --> Unimportant, delete.
+features                2336  --> All information in "features" is too different to properly analyze. The important information it has is already in other columns.
+flavors                10000  --> Unimportant, delete.
+imageurls                583  --> Unimportant, delete.
+isbn                   10000  --> Unimportant, delete.
+manufacturer            6578  --> manufacturernumber has less NULL values.
+manufacturernumber      2970  --> Consider null values as "no manufacturer" (could be a local shop).
+merchants               2561  --> Consider null values as "not being sold".
+prices_amountmin           3  --> Remove rows with no price_amountmin.
+prices_availability     9904  --> Unimportant, delete.
+prices_color            9918  --> Unimportant, delete.
+prices_condition        2612  --> Remove rows with no price_condition? Or consider as "not new".
+prices_count            9971  --> Unimportant, delete.
+prices_currency           33  --> Unimportant, delete.
+prices_dateadded           9  --> Unimportant, delete.
+prices_dateseen            9  --> Unimportant, delete.
+prices_flavor           9962  --> Unimportant, delete.
+prices_issale             27  --> Remove rows with no "issale".
+prices_merchant         2888  --> Unimportant, merchants has less nulls and serves the same purpose.
+prices_offer            6750  --> Unimportant, issale is better.
+prices_returnpolicy     9826  --> Unimportant, Almost all values are null, would create a bias.
+prices_shipping         7242  --> Consider null values as "no shipping".
+prices_size             9952  --> Unimportant, delete.
+prices_source           9994  --> Unimportant, delete.
+prices_sourceurls         53  --> Unimportant, delete.
+prices_warranty         9961  --> Unimportant, delete. Almost all values are null.
+quantities              9992  --> Unimportant, delete.
+reviews                 9546  --> Almost all values are null. Either only consider the few rows in which there is a review or not.
+sizes                   6859  --> Consider null values as 0/1 size offered.
+skus                    5548  --> Unimportant, delete.
+sourceurls                61  --> Unimportant, delete.
+upc                     3891  --> Unimportant, delete.
+vin                     9976  --> Unimportant, delete.
+websiteids              9993  --> Unimportant, delete.
+weight                  9622  --> Unimportant, delete.
+dtype: int64
+
